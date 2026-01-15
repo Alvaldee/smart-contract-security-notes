@@ -1,8 +1,12 @@
 # Reentrancy vulnerability
 
 ## Summary
-`reentrancy` is a vulnerability where a contract can be used to execute multiple times before its state updates. This allows adversaries to reeneter the function and repeat the action, 
-most notably withdrawing using the same state. Through such attacks, the advisory can withdraw all funds from the contract.
+Reentrancy is a vulnerability that occurs when a contract performs an external call before updating its internal state. Because external calls transfer control flow to potentially untrusted code, an attacker can re-enter the vulnerable function while the contract’s storage is still in its pre-call state, allowing the same logic to execute multiple times within a single transaction. This commonly results in repeated withdrawals of funds.
+
+---
+
+## Root Cause
+At the EVM level, external calls such as `call` transfer execution to another contract without enforcing any single-entry or locking mechanism. If critical state updates are performed after the external call, the contract remains in an inconsistent state during execution of the callee, enabling reentrant execution paths.
 
 ---
 
