@@ -25,3 +25,15 @@ function withdraw() external {
     }
 ```
 
+---
+
+## Types of Reentrancy
+
+### Mono-function reentrancy
+Occurs when a single function is re-entered multiple times before its execution completes.
+
+### Cross-function reentrancy
+Occurs when an attacker re-enters a different function within the same contract that shares mutable state.
+
+### Cross-contract reentrancy
+Occurs when reentrant execution crosses contract boundaries, exploiting inconsistent state assumptions across contracts.
